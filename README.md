@@ -12,8 +12,13 @@ Local use only.
 
 REQUIREMENTS 
 Node (express) (node php)
+
+npm install node-php
+
 PM2
-PHP
+
+npm install pm2 -g
+
 MYSQL
 
 THINGS TO EDIT
