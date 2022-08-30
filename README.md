@@ -4,13 +4,14 @@ ATVController for android devices running with RDM > POGO > ATLAS.
 
 Quick, simple and dirty adb controls with a GUI view and MYSQL Storage. 
 
-WARNING. POTENTIAL SECURUITY RISKS INVOLED.
-Use at your own risk of course. 
-Do not publicly expose the port. 
-Local use only.
-(On page shell. Unsanitized mysql inputs, This will change over time)
+## WARNING. POTENTIAL SECURUITY RISKS INVOLED.
 
-REQUIREMENTS 
+Use at your own risk of course.  
+Do not publicly expose the port.  
+Local use only.  
+(On page shell. Unsanitized mysql inputs, This will change over time).  
+  
+##REQUIREMENTS  
 Node (express) (node php)
 npm install node-php
 
