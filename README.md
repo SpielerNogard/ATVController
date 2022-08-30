@@ -51,18 +51,6 @@ Install MYSQL CLIENT if you need it with
 sudo apt-get install mysql-client  
 ```
 
-## BEFORE YOU START THIS WITH PM2.  
-
-Fix a depreciation warning in node-php after your do the steps above and have installed node.  
-```
-cd /path/to/ATVController/node_modules/node-php
-```
-
-Replace the main.js file here by running this command.  
-```
-wget -O main.js https://raw.githubusercontent.com/lilcezz/node-php-fix/main/main.js
-```
-
 ## THINGS TO EDIT.  
 
 "public/config.php"  
@@ -99,10 +87,28 @@ Place your ip ends like this
 
 ## Start ATVController.  
 
+BEFORE YOU START THIS WITH PM2.  
+
+Fix a depreciation warning in node-php after your do the steps above and have installed node.  
+```
+cd /path/to/ATVController/node_modules/node-php
+```
+
+Replace the main.js file here by running this command.  
+```
+wget -O main.js https://raw.githubusercontent.com/lilcezz/node-php-fix/main/main.js
+```
+
 Enter the ATVcontroller directory.  
 ```
 cd ATVController
 ```
+
+For good measure? and only needs to be run ONCE!
+```
+npm install
+```
+
 Start the service with PM2.  
 ```
 pm2 start ATVController.js
