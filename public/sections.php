@@ -21,7 +21,7 @@ echo '<div class="SectionTwo">';
 echo '<div class="Table">';
 ?>
 <?php
-newtable();
+devicetable();
 echo '</div></div>';
 }
 
