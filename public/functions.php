@@ -52,7 +52,7 @@ echo $res=shell_exec('scripts/stop.sh');
 
 // TABLE DATA DISPLAY AND PER DEVICE CONTROLLER
 
-function newtable() {
+function devicetable() {
 include("config.php");
 
 //MYSQLI CONNECTION
