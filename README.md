@@ -11,9 +11,9 @@ Do not publicly expose the port.
 Local use only.  
 (On page shell. Unsanitized mysql inputs, This will change over time).   
   
-## REQUIREMENTS  
+## REQUIREMENTS.  
 
-Download and install Node.js and PHP. With
+Download and install Node.js and PHP With  
 ```
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 ```
@@ -26,16 +26,23 @@ sudo apt-get install -y nodejs php
 sudo apt install php-fpm php-common php-mbstring php-xmlrpc php-soap php-gd php-xml php-intl php-mysql php-cli php-ldap php-zip php-curl php-cgi
 ```
 
-PM2
+Install PM2 if you need it with  
+```
 npm install pm2 -g
+```
 
-ADB
+Install ADB with  
+```
+Install ADB with
 sudo apt-get install android-tools-adb android-tools-fastboot
+```
 
-MYSQL CLIENT
+Install MYSQL CLIENT if you need it with
+```
 sudo apt-get install mysql-client  
+```
 
-## THINGS TO EDIT
+## THINGS TO EDIT.  
 "public/config.php"
 
 Set this to the starting 3 ranges of your ip
