@@ -2,7 +2,7 @@
 
 ATVController for android devices running with RDM > POGO > ATLAS. 
 
-Quick, simple and dirty add controls with a GUI view and MYSQL Storage. 
+Quick, simple and dirty adb controls with a GUI view and MYSQL Storage. 
 
 WARNING. POTENTIAL SECURUITY RISKS INVOLED.
 Use at your own risk of course. 
