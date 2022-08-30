@@ -9,9 +9,10 @@ Quick, simple and dirty adb controls with a GUI view and MYSQL Storage.
 Use at your own risk of course.  
 Do not publicly expose the port.  
 Local use only.  
-(On page shell. Unsanitized mysql inputs, This will change over time).  
+(On page shell. Unsanitized mysql inputs, This will change over time).   
   
-##REQUIREMENTS  
+## REQUIREMENTS  
+
 Node (express) (node php)
 npm install node-php
 
@@ -21,9 +22,10 @@ npm install pm2 -g
 ADB
 sudo apt-get install android-tools-adb android-tools-fastboot
 
-MYSQL
+MYSQL CLIENT
+sudo apt-get install mysql-client  
 
-THINGS TO EDIT
+## THINGS TO EDIT
 "public/config.php"
 
 Set this to the starting 3 ranges of your ip
@@ -47,15 +49,16 @@ Edit and make a list with the ip ends of each device to finsh the ip address fro
 
 -------------------------------------------------------------------
 
-HOW TO USE
+## HOW TO USE
 
 Load the page. (http://localhost:3000) (Change port in ATVController.js)
 On first page load it will create the table in the DB you selected.
 
-The table will be blank.
-The first option to the run and build the database with your device info hit 
+The db table will be blank.
+The first option to the run and build the database with your device info is "Build Info" 
 
-"Build Info" This will take your 'ips' list and do the following
+"Build Info"  
+This will take your 'ips' list and do the following
 Get the Name, Proxy (if any) and store this infomation the the db along with the local ip from the 'config and ip files set'.
 
 "Get all temps" 
@@ -75,7 +78,7 @@ Will Stop Atlas Mapping Mervice And Pokemon on all devices defined in 'ips'.
 
 -------------------------------------------------------------------
 
-PER DEVICE CONTROLS
+## PER DEVICE CONTROLS
 
 "Reboot"
 Reboots device.
