@@ -13,6 +13,16 @@ Local use only.
   
 ## REQUIREMENTS.  
 
+Clone the repo with.  
+```
+git clone https://github.com/lilcezz/ATVController.git
+```
+
+Enter the directory with.  
+```
+cd ATVController
+```
+
 Download and install Node.js and PHP With  
 ```
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -31,7 +41,7 @@ Install PM2 if you need it with
 npm install pm2 -g
 ```
 
-Install ADB with  
+Install ADB if you need it with  
 ```
 sudo apt-get install android-tools-adb android-tools-fastboot
 ```
@@ -39,6 +49,18 @@ sudo apt-get install android-tools-adb android-tools-fastboot
 Install MYSQL CLIENT if you need it with
 ```
 sudo apt-get install mysql-client  
+```
+
+## BEFORE YOU START THIS WITH PM2.  
+
+Fix a depreciation warning in node-php after your do the steps above and have installed node.  
+```
+cd /path/to/ATVController/node_modules/node-php
+```
+
+Replace the main.js file here by running this command.  
+```
+wget -O main.js https://raw.githubusercontent.com/lilcezz/node-php-fix/main/main.js
 ```
 
 ## THINGS TO EDIT.  
@@ -73,6 +95,17 @@ Place your ip ends like this
 65
 132
 165
+```
+
+## Start ATVController.  
+
+Enter the ATVcontroller directory.  
+```
+cd ATVController
+```
+Start the service with PM2.  
+```
+pm2 start ATVController.js
 ```
 -------------------------------------------------------------------
 
