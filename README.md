@@ -42,100 +42,113 @@ sudo apt-get install mysql-client
 ```
 
 ## THINGS TO EDIT.  
-"public/config.php"
 
-Set this to the starting 3 ranges of your ip
-$lanip=0.0.0
+"public/config.php"  
 
-Edit the DB info
+Set this to the starting 3 ranges of your ip  
+```
+$lanip=0.0.0 
+```
 
-Enable or Disable wth true=off/false=off
-$noScreenshot
-$noProxy
+Edit the DB info to connect  
 
-You shouldn't need to edit the ADB port
+Enable or Disable wth true=off/false=off  
+```
+$noScreenshot = true;
+$noProxy = false;
+```
 
-IPS file
-"public/scripts/ips"
-Edit and make a list with the ip ends of each device to finsh the ip address from config.php file
-32
+You shouldn't need to edit the ADB port  
+
+IPS file (has no extention)  
+
+"public/scripts/ips"  
+Edit with a text editor like vim or nano and make a list with the ip ends of each device to finsh the ip address from config.php file  
+```
+$ vim ips
+```
+Place your ip ends like this  
+```
+32  
 65
 132
 165
-
+```
 -------------------------------------------------------------------
 
-## HOW TO USE
+## HOW TO USE  
 
-Load the page. (http://localhost:3000) (Change port in ATVController.js)
-On first page load it will create the table in the DB you selected.
+Load the page. (http://localhost:3000) (Change port in ATVController.js). 
+On first page load it will create the table in the DB you selected.  
 
-The db table will be blank.
-The first option to the run and build the database with your device info is "Build Info" 
+The db table and on page device table will be blank.  
+The first option to the run and build the database with your device info is "Build Info".  
 
 "Build Info"  
-This will take your 'ips' list and do the following
-Get the Name, Proxy (if any) and store this infomation the the db along with the local ip from the 'config and ip files set'.
+This will take your 'ips' list and do the following.  
+Get the Name, Proxy (if any) and store this infomation the the db along with the local ip from the 'config and ip files set'.  
 
-"Get all temps" 
-Gets all temps from ALL devices and will build this info to display in the table. 
+"Get all temps".  
+Gets all temps from ALL devices and will build this info to display in the table.  
 
-"Update All Devices"
-Will Push the .apks from the folder location apps/.
+"Update All Devices".  
+Will Push the .apks from the folder location apps/ .  
 
-"Reboot All Devices"
-Will Reboot all devices defined in 'ips'.
+"Reboot All Devices".   
+Will Reboot all devices defined in 'ips'.  
 
-"Start All Atlas"
-Will Start the Atlas Mapping Service on all devices defined in 'ips'.
+"Start All Atlas".  
+Will Start the Atlas Mapping Service on all devices defined in 'ips'.  
 
-"Stop All Apps"
-Will Stop Atlas Mapping Mervice And Pokemon on all devices defined in 'ips'.
+"Stop All Apps".  
+Will Stop Atlas Mapping Mervice And Pokemon on all devices defined in 'ips'.  
 
 -------------------------------------------------------------------
 
 ## PER DEVICE CONTROLS
 
-"Reboot"
+"Reboot".  
 Reboots device.
 
-"start Atlas"
+"start Atlas". 
 Start Atlas Mapping Service on device.
 
-"Stop Atlas/Pogo"
+"Stop Atlas/Pogo".  
 Stop both Atlas and Pogo Services on device.
 
-"Update Pokemon"
-Installs the "pokemongo.apk" (rename the apk the match this title) app located inside folder /apps to the device.
+"Update Pokemon".  
+Installs the "pokemongo.apk" (rename the apk the match this title) app located inside folder /apps to the device.  
 
-"Updated Atlas"
-Installs the "atlas.apk" (rename the apk the match this title) app located inside /apps folder to the device.
+"Updated Atlas".  
+Installs the "atlas.apk" (rename the apk the match this title) app located inside /apps folder to the device.  
 
-"Update Atlas Config"
-Pushes the "atlas.config" located inside /apps folder to the device. (EDIT THIS FILE TO YOUR NEEDS)
+"Update Atlas Config".  
+Pushes the "atlas.config" located inside /apps folder to the device. (EDIT THIS FILE TO YOUR NEEDS).  
 
-"Push eMagisk.zip"
+"Push eMagisk.zip".  
 Pushes the "eMagisk.zip" located inside /apps folder to the device.
 
-"Push emagisk.config"
-Pushes the "emagisk.config" located inside /apps folder to the device. (EDIT THIS FILE TO YOUR NEEDS)
+"Push emagisk.config".  
+Pushes the "emagisk.config" located inside /apps folder to the device. (EDIT THIS FILE TO YOUR NEEDS).  
 
-*** PROXY ***
-"Change"
-In the text area place your new proxy ip in the format 
-IP:PORT
-(Does not support username/password proxys yet, whitelist your IP)
+*** PROXY ***  
+"Change".  
+In the text area place your new proxy ip in the format.  
+```
+IP:PORT i.e 123.456.789.123:98765
+```
+(Does not support username/password proxys yet, whitelist your IP).  
  
-*** SCREENSHOT***
-"Get Screen Shot"
+*** SCREENSHOT ***  
+"Get Screen Shot".  
 This section only builds on press of the button atm.
 
 
 
 -------------------------------------------------------------------
 
-Built by @zero-day-#0001
+Built by @zero-day-#0001  
 
-Scripts provided by @Xerock
+Scripts provided by @Xerock  
 
  
