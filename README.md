@@ -13,8 +13,18 @@ Local use only.
   
 ## REQUIREMENTS  
 
-Node (express) (node php)
-npm install node-php
+Download and install Node.js and PHP. With
+```
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+```
+
+```
+sudo apt-get install -y nodejs php
+```
+
+```
+sudo apt install php-fpm php-common php-mbstring php-xmlrpc php-soap php-gd php-xml php-intl php-mysql php-cli php-ldap php-zip php-curl php-cgi
+```
 
 PM2
 npm install pm2 -g
