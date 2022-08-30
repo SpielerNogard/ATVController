@@ -12,12 +12,13 @@ Local use only.
 
 REQUIREMENTS 
 Node (express) (node php)
-
 npm install node-php
 
 PM2
-
 npm install pm2 -g
+
+ADB
+sudo apt-get install android-tools-adb android-tools-fastboot
 
 MYSQL
 
