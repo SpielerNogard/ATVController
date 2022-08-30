@@ -33,7 +33,6 @@ npm install pm2 -g
 
 Install ADB with  
 ```
-Install ADB with
 sudo apt-get install android-tools-adb android-tools-fastboot
 ```
 
