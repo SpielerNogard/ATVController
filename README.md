@@ -53,10 +53,13 @@ sudo apt-get install mysql-client
 
 ## FILES AND THINGS TO EDIT.  
 
-### Copy the config "public/config.php"  
+### Copy the config.   
+### "public/config.php"  
 ```
 cp config.php.example config.php
 ```
+
+With a text editor   
 
 Set this to the starting 3 ranges of your ip  
 ```
@@ -73,8 +76,8 @@ $noProxy = false;
 
 You shouldn't need to edit the ADB port  
 
-###IPS file (has no extention)  
-###Copy the config "public/scripts/ips"  
+### IPS file (has no extention).  
+### Copy the ips "public/scripts/ips"   
 ```
 cp example.ips ips
 ```
@@ -89,6 +92,12 @@ Place your ip ends like this
 65
 132
 165
+```
+
+### MAKE THE SHELLS EXECUTABLE FILES.  
+### "/public/scripts/"  
+```
+chmod +x *.sh
 ```
 
 ## Start ATVController.  
