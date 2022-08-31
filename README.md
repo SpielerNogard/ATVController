@@ -133,6 +133,10 @@ pm2 start ATVController.js
 
 ## HOW TO USE  
 
+### THESE COMMANDS ONCE HIT CAN TAKE A MINUTE OR MORE TO RUN DEPENDING ON DEVICE COUNT!.  
+When you hit a button below. It is safe to hit the "HOME" button in the menu to trigger a refresh.  
+These scripts will continue to run in the background until there done, you may refresh the page after to see the updates.  
+
 Load the page. (http://localhost:3000) (Change port in ATVController.js). 
 On first page load it will create the table in the DB you selected.  
 
