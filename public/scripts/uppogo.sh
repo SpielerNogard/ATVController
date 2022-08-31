@@ -16,7 +16,6 @@ for i in `cat scripts/ips` ; do
       echo Updating Pokemon on $ip
       sleep 1
       adb install -r app/pokemongo.apk
-      adb install -r app/atlas.apk
       adb kill-server
     done
   else
@@ -26,7 +25,6 @@ for i in `cat scripts/ips` ; do
     echo Updating Pokemon on $ip
     sleep 1
     adb install -r app/pokemongo.apk
-    adb install -r app/atlas.apk
     adb kill-server
   fi
 done
