@@ -152,6 +152,8 @@ Gets all temps from ALL devices and will build this info to display in the table
 
 "Update All Devices".  
 Will Push the .apks from the folder location apps/ .  
+Installs the "pokemongo.apk" (rename the apk the match this title) app located inside folder /apps to the device.  
+Installs the "atlas.apk" (rename the apk the match this title) app located inside folder /apps to the device.
 
 "Reboot All Devices".   
 Will Reboot all devices defined in 'ips'.  
