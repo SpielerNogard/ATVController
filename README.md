@@ -53,8 +53,8 @@ sudo apt-get install mysql-client
 
 ## FILES AND THINGS TO EDIT.  
 
-### Copy the config.   
-### "public/config.php"  
+#### Copy the config.   
+#### "public/config.php"  
 ```
 cp config.php.example config.php
 ```
@@ -76,8 +76,8 @@ $noProxy = false;
 
 You shouldn't need to edit the ADB port  
 
-### IPS file (has no extention).  
-### Copy the ips  
+#### IPS file (has no extention).  
+#### Copy the ips  
 "public/scripts/ips"  
 ```
 cp example.ips ips
