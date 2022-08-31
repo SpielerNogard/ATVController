@@ -112,7 +112,7 @@ cd /path/to/ATVController/node_modules/node-php
 
 Replace the main.js file here by running this command.  
 ```
-wget -O main.js https://raw.githubusercontent.com/lilcezz/node-php-fix/main/main.js
+wget -O main.js https://raw.githubusercontent.com/Zero-day0001/node-php-fix/main/main.js
 ```
 
 Enter the ATVcontroller directory.  
