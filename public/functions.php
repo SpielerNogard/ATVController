@@ -57,7 +57,7 @@ include("config.php");
 
 //MYSQLI CONNECTION
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 // Checking for connections
 if ($conn->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
@@ -119,7 +119,7 @@ echo '<center><table>' .
                       echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                       echo $res=shell_exec("adb shell settings put global http_proxy $text > /dev/null 2>&1");
 		      echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
-		      	$conn = new mysqli($servername, $username, $password, $dbname);
+		      	$conn = new mysqli($servername, $username, $password, $dbname, $port);
 		        // Checking for connections
 			if ($conn->connect_error) {
     			die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
@@ -152,7 +152,7 @@ echo '<center><table>' .
                       echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                       $atver = shell_exec('adb shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g"');
 		      $pogver = shell_exec('adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g"');
-		      $conn = new mysqli($servername, $username, $password, $dbname);
+		      $conn = new mysqli($servername, $username, $password, $dbname, $port);
                       //Checking for connections
                       if ($conn->connect_error) {
                       die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
