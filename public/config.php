@@ -44,4 +44,17 @@ $conn->close();
 
 }
 
+//The names of the directories that we need to create or check exist.
+$dirscrshot = 'screenshot';
+$diroutput = 'outputs';
+//Check if the directory already exists.
+if(!is_dir($dirscrshot)){
+    //Directory does not exist, so lets create it.
+    mkdir($dirscrshot, 0755);
+}
+if(!is_dir($diroutput)){
+    //Directory does not exist, so lets create it.
+    mkdir($diroutput, 0755);
+}
+
 ?>
