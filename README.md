@@ -51,9 +51,12 @@ Install MYSQL CLIENT if you need it with
 sudo apt-get install mysql-client  
 ```
 
-## THINGS TO EDIT.  
+## FILES AND THINGS TO EDIT.  
 
-"public/config.php"  
+### Copy the config "public/config.php"  
+```
+cp config.php.example config.php
+```
 
 Set this to the starting 3 ranges of your ip  
 ```
@@ -70,9 +73,12 @@ $noProxy = false;
 
 You shouldn't need to edit the ADB port  
 
-IPS file (has no extention)  
+###IPS file (has no extention)  
+###Copy the config "public/scripts/ips"  
+```
+cp example.ips ips
+```
 
-"public/scripts/ips"  
 Edit with a text editor like vim or nano and make a list with the ip ends of each device to finsh the ip address from config.php file  
 ```
 $ vim ips
