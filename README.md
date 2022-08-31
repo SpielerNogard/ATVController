@@ -10,6 +10,9 @@ Use at your own risk of course.
 Do not publicly expose the port.  
 Local use only.  
 (On page shell. Unsanitized mysql inputs, This will change over time).   
+
+## TESTED SETUP.  
+Rasp pi - Ubuntu   
   
 ## REQUIREMENTS.  
 
