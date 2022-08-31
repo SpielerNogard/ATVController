@@ -52,7 +52,7 @@ echo $res=shell_exec('scripts/stop.sh');
 
 // TABLE DATA DISPLAY AND PER DEVICE CONTROLLER
 
-function devicetable() {
+function newtable() {
 include("config.php");
 
 //MYSQLI CONNECTION
@@ -65,61 +65,54 @@ if ($conn->connect_error) {
 $sql = " SELECT * FROM Devices; ";
 $result = $conn->query($sql);
 $conn->close();
-?>
 
-<!--START OF TABLE INFO -->
-<center><table>
-	<tr>
-	<th>ID</th>
-        <th>Device Name</th>
-        <th>Temp</th>
-	<th>Local IP</th>
-	<?php
+//START OF TABLE INFO
+echo '<center><table>' .
+	'<tr>' .
+	'<th>ID</th>' .
+        '<th>Device Name</th>' .
+        '<th>Temp</th>' .
+	'<th>Local IP</th>';
+
         if($noProxy === false){
-        ?>
-	<th>Proxy IP</th>
-	<?php
+	echo '<th>Proxy IP</th>';
 	}
-	?>
-	<th>App Versions</th>
-	<th>Controls</th>
-	<?php
+	
+	echo '<th>App Versions</th>' .
+		'<th>Controls</th>';
+
         if($noScreenshot === false){
-        ?>
-	<th>Screenshot</th>
-	<?php
+	echo '<th>Screenshot</th>';
 	}	
-	?>
-	</tr>
-              	<?php
-                while($rows=$result->fetch_assoc())
-		{
-                ?>
-		<tr>
-		<td><?php echo $rows['ID'];?></td>
-                <?php
-                $id = $rows['ID'];
-                ?>
-                <td><?php echo $rows['ATVNAME'];?></td>
-                <?php
-                $name = $rows['ATVNAME'];
-                ?>
-                <td><?php echo $rows['ATVTEMP'];?></td>
-                <?php
-                $atvtemp = $rows['ATVTEMP'];
-                ?>
-                <td><?php echo $rows['ATVLOCALIP'];?></td>
-		<?php                
-                $localip = $rows['ATVLOCALIP'];
+	echo '</tr>';
+                while($rows=$result->fetch_assoc()){
+		$id = $rows['ID'];	
+		$name = $rows['ATVNAME'];
+		$atvtemp = $rows['ATVTEMP'];
+		$localip = $rows['ATVLOCALIP'];
+		$atvproxy = $rows['ATVPROXYIP'];
+		$atvpogover = $rows['ATVPOGOVER'];
+		$atvatver = $rows['ATVATVER'];
+		echo '<tr>' .
+		'<td>' .
+		"$id" .
+		'</td>' .
+	        '<td>' .
+		"$name" .
+		'</td>' .
+                '<td>' .
+		"$atvtemp" .
+		'</td>' .
+                '<td>' .
+		"$localip" .
+		'</td>';
         	if($noProxy === false){
-        	?>
-                <td>
-		<?php echo $rows['ATVPROXYIP']; ?>
-                <form id="proxy" action="index.php" method="post">
-                <textarea name="proxy-<?php echo "$name"; ?>" placeholder="IP:PORT" rows="1" style="resize:none"></textarea><br>
-                <input type="submit" value="Change" />
-		</form>
-		<?php
+                echo '<td>' .
+		"$atvproxy" .
+                '<form id="proxy" action="index.php" method="post">' .
+                '<textarea name="proxy-' . $name . '" placeholder="IP:PORT" rows="1" style="resize:none"></textarea><br>' .
+                '<input type="submit" value="Change" />' .
+		'</form>';
 		if(isset($_POST["proxy-$name"])){
 		      $text = $_POST["proxy-$name"];
 		      echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
@@ -127,7 +120,7 @@ $conn->close();
                       echo $res=shell_exec("adb shell settings put global http_proxy $text > /dev/null 2>&1");
 		      echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 		      	$conn = new mysqli($servername, $username, $password, $dbname);
-		      // Checking for connections
+		        // Checking for connections
 			if ($conn->connect_error) {
     			die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
 			}else{	
@@ -139,26 +132,21 @@ $conn->close();
 			window.location.reload();
 			</script>
 			<?php
-			//$conn->close();
+			$conn->close();
 			}
 		}
-		?>
-                </td>
-		<?php
+                echo '</td>';
 		}
-		?>
-		<td>
-		<?php
+		
+		echo '<td>';
 		echo 'Atlas Version:<br>';
-		echo $rows['ATVATVER'];
+		echo "$atvpogover";
 		echo '<br>';
 		echo 'Pogo Version:<br>';
-		echo $rows['ATVPOGOVER']; 
+		echo "$atvatver"; 
 		echo '<br>';
-		?>
-		<form id='ver-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Get Versions' name='ver-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		echo '<form id="ver-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Get Versions" name="ver-' . $name . '" id="tablebutton"/></form>';
                 if(isset($_POST["ver-$name"])){
                       echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                       echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
@@ -172,107 +160,88 @@ $conn->close();
                       $sql = " UPDATE Devices SET ATVATVER = '$atver', ATVPOGOVER = '$pogver'  WHERE ID = $id; ";
                       $conn->query($sql);
                       echo "Checking Versions";
-                      ?>
+		      $conn->close();
+		      echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
+			?>
                         <script>
                         window.location.reload();
                         </script>
-                        <?php
-                        //$conn->close();
+                      <?php
                       }
-		echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 		}
-                ?>
-		</td>
-		<td>
-		<form id='reboot-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Reboot' name='reboot-<?php echo "$name" ?>' id='tablebutton'/></form>
-		<?php
+		echo '</td>' .
+		'<td>' .
+		'<form id="reboot-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Reboot" name="reboot-' . $name . '" id="tablebutton"/></form>';
 		if(isset($_POST["reboot-$name"])){
 			echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 			echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
 			echo $res=shell_exec('adb shell reboot > /dev/null 2>&1');
 			echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 		}
-		?>
-                <form id='start-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Start Atlas' name='start-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		
+		echo '<form id="start-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Start Atlas" name="start-' . $name . '" id="tablebutton"/></form>';
                 if(isset($_POST["start-$name"])){
 			echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 			echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                         echo $res=shell_exec('adb shell "am startservice com.pokemod.atlas/com.pokemod.atlas.services.MappingService" > /dev/null 2>&1');
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 		}
-                ?>
-                <form id='stop-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Stop Atlas/Pogo' name='stop-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		echo '<form id="stop-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Stop Atlas/Pogo" name="stop-' . $name . '" id="tablebutton"/></form>';
                 if(isset($_POST["stop-$name"])){
 		 	echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                         echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                         echo $res=shell_exec('adb shell "su -c am force-stop com.nianticlabs.pokemongo & am force-stop com.pokemod.atlas" > /dev/null 2>&1');
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 		}
-                ?>
-                <form id='uppoke-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Update Pokemon' name='uppoke-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		echo '<form id="uppoke-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Update Pokemon" name="uppoke-' . $name . '" id="tablebutton"/></form>';
                 if(isset($_POST["uppoke-$name"])){
 			echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                         echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                         echo $res=shell_exec('adb install -r app/pokemongo.apk > /dev/null 2>&1');
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 		}
-		?>
-		<form id='upat-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Update Atlas' name='upat-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		echo '<form id="upat-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Update Atlas" name="upat-' . $name . '" id="tablebutton"/></form>';
                 if(isset($_POST["upat-$name"])){
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                         echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                         echo $res=shell_exec('adb install -r app/atlas.apk > /dev/null 2>&1');
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                 }
-		?>
-		<form id='upatcon-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Update Atlas Config' name='upatcon-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		echo '<form id="upatcon-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Update Atlas Config" name="upatcon-' . $name . '" id="tablebutton"/></form>';
                 if(isset($_POST["upatcon-$name"])){
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                         echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                         echo $res=shell_exec('adb push app/atlas_config.json /data/local/tmp > /dev/null 2>&1');
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                 }
-		?>
-		<form id='puemag-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Push eMagisk.zip' name='puemag-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		echo '<form id="puemag-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Push eMagisk.zip" name="puemag-' . $name . '" id="tablebutton"/></form>';
                 if(isset($_POST["puemag-$name"])){
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                         echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                         echo $res=shell_exec('adb push app/eMagisk.zip /sdcard > /dev/null 2>&1');
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                 }
-                ?>
-		<form id='puemagcon-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Push emagisk.config' name='puemagcon-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
-                if(isset($_POST["update-$name"])){
+		echo '<form id="puemagcon-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Push emagisk.config" name="puemagcon-' . $name . '" id="tablebutton"/></form>';
+                if(isset($_POST["puemagcon-$name"])){
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                         echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
                         echo $res=shell_exec('adb push app/emagisk.congif /data/local/tmp > /dev/null 2>&1');
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                 }
-		?>
-		</td>
-		<?php
+		echo '</td>';
 		if($noScreenshot === false){
-		?>
-		<td>
-		<img src='screenshot/<?php echo "$name"; ?>.png' width='100' height='160'>
-		<form id='scrshot-<?php echo "$name" ?>' action='index.php' method ='post' align='center'>
-                <input type='submit' value='Get Screen Shot' name='scrshot-<?php echo "$name" ?>' id='tablebutton'/></form>
-                <?php
+		echo '<td>' .
+		'<img src="screenshot/' . $name . '.png" width="100" height="160">' .
+		'<form id="scrshot-' . $name . '" action="index.php" method ="post" align="center">' .
+                '<input type="submit" value="Get Screenshot" name="scrshot-' . $name . '" id="tablebutton"/></form>';
 		if(isset($_POST["scrshot-$name"])){
                         echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                         echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
@@ -281,17 +250,11 @@ $conn->close();
 			echo $res=shell_exec("adb shell rm /sdcard/screen.png > /dev/null 2>&1");
 			echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
                 }
-                ?>
-                </td>
-		<?php
+                echo '</td>';
 		}
-		?>
-		</tr>
-		<?php
+		echo '</tr>';
                 }
-                ?>
-</table></center>
-<?php
+	echo '</table></center>';
 }
 
 ?>
