@@ -40,7 +40,17 @@ function vercheck() {
         if(isset($_POST['vercheck'])){
                 echo $res=shell_exec('scripts/vercheck.sh');
         }
-}  
+}
+
+function anvercheck() {
+        echo
+        '<form id="anvercheck" action="index.php" method ="post">' .
+                '<button name="anvercheck" type="submit" class="btn btn-primary menuButton">Recollect Android Version</button>' .
+        '</form>';
+        if(isset($_POST['anvercheck'])){
+                echo $res=shell_exec('scripts/anvercheck.sh');
+        }
+}
 
 function upatlas() {
 	echo 
@@ -122,6 +132,7 @@ echo '<div class="cssContainer">' .
 		
 				echo '<th>PoGo Version</th>' .
 				'<th>Atlas Version</th>' .
+				'<th>Android Version</th>' .
 				'<th>Controls</th>';
 	
 				if($noScreenshot === false){
@@ -138,6 +149,7 @@ echo '<div class="cssContainer">' .
 			$atvproxy = $rows['ATVPROXYIP'];
 			$atvpogover = $rows['ATVPOGOVER'];
 			$atvatver = $rows['ATVATVER'];
+			$anver = $rows['ANDROIDVER'];
 			echo '<tr>' .
 				'<td class="align-middle">' . $id . '</td>' .
 				'<td class="align-middle">' . $name . '</td>' .
@@ -202,7 +214,7 @@ echo '<div class="cssContainer">' .
 						}
 				echo '</td>';
 				
-				// Get 
+				// Get Atlas Version
 				echo '<td class="align-middle">' . $atvatver . ''; 
 					echo '<form id="version-atlas-' . $name . '" action="index.php" method ="post">' .
 							'<button name="version-atlas-' . $name . '" type="submit" class="btn btn-primary versionButton">Get Version Atlas</button>' .
@@ -252,6 +264,34 @@ echo '<div class="cssContainer">' .
 							}
 						}
 				echo '</td>';
+
+				// Get Android Version
+                                echo '<td class="text-center align-middle"> ' . $anver . '';
+                                        echo '<form id="version-android-' . $name . '" action="index.php" method ="post">' .
+                                                        '<button name="version-android-' . $name . '" type="submit" class="btn btn-primary versionButton">Get Version Android</button>' .
+                                                '</form>';
+                                                if(isset($_POST["version-android-$name"])){
+                                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
+                                                        echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
+                                                        $anvers= shell_exec('adb shell getprop ro.build.version.release');
+                                                        $conn = new mysqli($servername, $username, $password, $dbname, $port);
+                                                        //Checking for connections
+                                                        if ($conn->connect_error) {
+                                                                die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
+                                                        }else {
+                                                                $sql = " UPDATE Devices SET ANDROIDVER = '$anvers' WHERE ID = $id; ";
+                                                                $conn->query($sql);
+                                                                echo "Checking Android Version";
+                                                                $conn->close();
+                                                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1'); ?>
+                                                                <script>
+                                                                window.location.reload();
+                                                                </script>
+                                                        <?php
+                                                        }
+                                                }
+                                echo '</td>';
+
 		
 				echo '<td class="controlTable">'; // Device Options for Users ---
 				
