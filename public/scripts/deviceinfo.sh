@@ -22,8 +22,8 @@ for i in `cat scripts/ips` ; do
       adb connect $ip:$adbport
       sleep 1
       name=$(adb shell cat /data/local/tmp/atlas_config.json | grep -oP '"deviceName": *"\K[^"]*')
-      pogover=$(db shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g")
-      atver=$(adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g")
+      atver=$(db shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g")
+      pokever=$(adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g")
       temp=$(adb shell cat /sys/class/thermal/thermal_zone0/temp | awk '{print substr($0, 1, length($0)-3)}')
       pip=$(adb shell settings list global | grep "global_http_proxy_host" | cut -d '=' -f2)
       pipp=$(adb shell settings list global | grep "global_http_proxy_port" | cut -d '=' -f2)
@@ -44,8 +44,8 @@ for i in `cat scripts/ips` ; do
     adb connect $ip:$adbport
     sleep 1
     name=$(adb shell cat /data/local/tmp/atlas_config.json | grep -oP '"deviceName": *"\K[^"]*')
-    pogover=$(adb shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g")
-    atver=$(adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g")
+    atver=$(adb shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g")
+    pogover=$(adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g")
     temp=$(adb shell cat /sys/class/thermal/thermal_zone0/temp | awk '{print substr($0, 1, length($0)-3)}')
     pip=$(adb shell settings list global | grep "global_http_proxy_host" | cut -d '=' -f2)
     pipp=$(adb shell settings list global | grep "global_http_proxy_port" | cut -d '=' -f2)
