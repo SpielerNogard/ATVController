@@ -13,11 +13,11 @@ echo
 				echo '</div>';
 				echo '<div class="col-md-4 text-center">';
 					vercheck();
-					rebootbutton();
+					anvercheck();
 				echo 
 				'</div>';
 				echo '<div class="col-md-4 text-center">';
-					moreToCome();
+					rebootbutton();
 					moreToCome();
 				echo 
 				'</div>
