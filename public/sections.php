@@ -12,8 +12,8 @@ echo
 					tempbutton();
 				echo '</div>';
 				echo '<div class="col-md-4 text-center">';
-					moreToCome();
-					moreToCome();
+					vercheck();
+					rebootbutton();
 				echo 
 				'</div>';
 				echo '<div class="col-md-4 text-center">';
@@ -29,8 +29,8 @@ echo
 			<div class="buttonHeaderText lead">Device Utilities:</div>
 			<div class="row">
 				<div class="col-md-4 text-center">';
-					updatebutton();
-					rebootbutton();
+					upatlas();
+					uppogo();
 				echo '</div>';
 				echo '<div class="col-md-4 text-center">';
 					startbutton();

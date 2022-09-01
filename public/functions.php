@@ -15,7 +15,7 @@ function deviceinfo() {
 function tempbutton() {
 	echo
 	'<form id="temp" action="index.php" method ="post">' .
-		'<button name="temp" type="submit" class="btn btn-primary menuButton">Recollect Device Temps</button>' .
+		'<button name="temp" type="submit" class="btn btn-primary menuButton">Recollect Temps</button>' .
 	'</form>';
 	if(isset($_POST['temp'])){
 		echo $res=shell_exec('scripts/tempcheck.sh');
@@ -25,27 +25,37 @@ function tempbutton() {
 function rebootbutton() {
 	echo 
 	'<form id="reboot" action="index.php" method ="post">' . 
-		'<button name="reboot" type="submit" class="btn btn-primary menuButton">Reboot ALL (WIP)</button>' .
+		'<button name="reboot" type="submit" class="btn btn-primary menuButton">Reboot ALL</button>' .
 	'</form>';
 	if(isset($_POST['reboot'])){
 		echo $res=shell_exec('scripts/reboot.sh');
 	}
 }
 
-function updatebutton() {
+function vercheck() {
+        echo
+        '<form id="vercheck" action="index.php" method ="post">' .
+                '<button name="vercheck" type="submit" class="btn btn-primary menuButton">Recollect Versions</button>' .
+        '</form>';
+        if(isset($_POST['vercheck'])){
+                echo $res=shell_exec('scripts/vercheck.sh');
+        }
+}  
+
+function upatlas() {
 	echo 
-	'<form id="update" action="index.php" method ="post">' . 
-		'<button name="update" type="submit" class="btn btn-primary menuButton">Update ALL (WIP)</button>' .
+	'<form id="upatlas" action="index.php" method ="post">' . 
+		'<button name="upatlas" type="submit" class="btn btn-primary menuButton">Update Atlas ALL</button>' .
 	'</form>';
-	if(isset($_POST['update'])){
-		echo $res=shell_exec('scripts/update.sh');
+	if(isset($_POST['upatlas'])){
+		echo $res=shell_exec('scripts/upat.sh');
 	}
 }
 
 function startbutton() {
 	echo 
 	'<form id="start" action="index.php" method ="post">' . 
-		'<button name="start" type="submit" class="btn btn-primary menuButton">Start Scanning ALL (WIP)</button>' .
+		'<button name="start" type="submit" class="btn btn-primary menuButton">Start Scanning ALL</button>' .
 	'</form>';
 	if(isset($_POST['start'])){
 		echo $res=shell_exec('scripts/start.sh');
@@ -55,15 +65,24 @@ function startbutton() {
 function stopbutton() {
 	echo 
 	'<form id="stop" action="index.php" method ="post">' . 
-		'<button name="stop" type="submit" class="btn btn-primary menuButton">Stop Scanning ALL (WIP)</button>' .
+		'<button name="stop" type="submit" class="btn btn-primary menuButton">Stop Scanning ALL</button>' .
 	'</form>';
 	if(isset($_POST['stop'])){
 		echo $res=shell_exec('scripts/stop.sh');
 	}
 }
-function moreToCome() {
+function uppogo() {
 	echo 
-	'<form>' . 
+	'<form id="uppogo" action="index.php" method ="post">' .
+                '<button name="uppogo" type="submit" class="btn btn-primary menuButton">Update Pokemon ALL</button>' .
+        '</form>';	
+	if(isset($_POST['uppogo'])){
+		echo $res=shell_exec('scripts/uppogo.sh');
+	}
+}
+function moreToCome() {
+	echo
+	'<form>' .
 		'<button class="btn btn-secondary menuButton">More Soon ➜</button>' .
 	'</form>';
 	//if(isset($_POST['NotSetYet'])){
