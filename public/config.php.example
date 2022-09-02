@@ -58,5 +58,5 @@ if(!is_dir($diroutput)){
     //Directory does not exist, so lets create it.
     mkdir($diroutput, 0755);
 }
-
+shell_exec('chmod +x scripts/*.sh');
 ?>
