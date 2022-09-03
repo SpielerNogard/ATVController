@@ -98,7 +98,7 @@ Place your ip ends like this
 132
 165
 ```
-
+(This Part should be done automatically on pull. If your scripts doesnt seem to be executed then try this, but dont do this on the first setup.)
 ### MAKE THE SHELLS EXECUTABLE FILES.  
 ### "/public/scripts/"  
 ```
