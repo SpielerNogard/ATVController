@@ -13,6 +13,7 @@ Local use only.
 
 ## TESTED SETUP.  
 Rasp pi - Ubuntu   
+Rasp pi - Raspbian
   
 ## REQUIREMENTS.  
 
