@@ -23,11 +23,13 @@ for i in `cat scripts/ips` ; do
       sleep .5
       atver=$(adb shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g")
       pogover=$(adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g")
+      anver=$(adb shell getprop ro.build.version.release)
       echo Checking Versions at 
       echo Device - $ip:$adbport
       echo Atlas Version - $atver
       echo Pokemon Version - $pogover
-      mysql -u $dbuser -p$dbpass -h $dbhost -P $port -D $db -e "UPDATE Devices SET ATVATVER = '$atver', ATVPOGOVER = '$pogover' WHERE ATVLOCALIP = '$ip';"
+      echo Android Version - $anver
+      mysql -u $dbuser -p$dbpass -h $dbhost -P $port -D $db -e "UPDATE Devices SET ATVATVER = '$atver', ATVPOGOVER = '$pogover', ANDROIDVER = '$anver' WHERE ATVLOCALIP = '$ip';"
       adb kill-server
     done
   else
@@ -38,11 +40,13 @@ for i in `cat scripts/ips` ; do
     sleep .5
      atver=$(adb shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g")
      pogover=$(adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g")
+     anver=$(adb shell getprop ro.build.version.release)
      echo Checking Versions at 
      echo Device - $ip:$adbport
      echo Atlas Version - $atver
      echo Pokemon Version - $pogover
-    mysql -u $dbuser -p$dbpass -h $dbhost -P $port  -D $db -e "UPDATE Devices SET ATVATVER = '$atver', ATVPOGOVER = '$pogover' WHERE ATVLOCALIP = '$ip';"
+     echo Android Version - $anver
+    mysql -u $dbuser -p$dbpass -h $dbhost -P $port  -D $db -e "UPDATE Devices SET ATVATVER = '$atver', ATVPOGOVER = '$pogover', ANDROIDVER = '$anver'  WHERE ATVLOCALIP = '$ip';"
     adb kill-server
   fi
 done
