@@ -17,7 +17,7 @@ echo
 				echo 
 				'</div>';
 				echo '<div class="col-md-4 text-center">';
-					rebootbutton();
+					moreToCome();
 					moreToCome();
 				echo 
 				'</div>
@@ -37,7 +37,7 @@ echo
 					stopbutton();
 				echo '</div>';
 				echo '<div class="col-md-4 text-center">';
-					moreToCome();
+					rebootbutton();
 					moreToCome();
 				echo 
 				'</div>
