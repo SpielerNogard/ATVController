@@ -209,6 +209,83 @@ echo '<div class="cssContainer">' .
 					
 					//General TAB
 					echo '<div id="tabGeneral-' . $name .'" class="tabcontent tabcontent-' . $name .'">';
+							
+							// Get PoGo Version
+							echo '<form class="d-inline" id="version-pogo-' . $name . '" action="index.php" method ="post">' .
+								'<button name="version-pogo-' . $name . '" type="submit" class="btn btn-primary controlButton">Get Version PoGo</button>' .
+                            '</form>';
+							if(isset($_POST["version-pogo-$name"])){
+								echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
+								echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
+								$pogver = shell_exec('adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g"');
+								$conn = new mysqli($servername, $username, $password, $dbname, $port);
+								//Checking for connections
+								if ($conn->connect_error) {
+										die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
+								}else {
+										$sql = " UPDATE Devices SET ATVPOGOVER = '$pogver' WHERE ID = $id; ";
+										$conn->query($sql);
+										echo "Checking PoGo Version";
+										$conn->close();
+										echo $res=shell_exec('adb kill-server > /dev/null 2>&1'); ?>
+										<script>
+										window.location.reload();
+										</script>
+								<?php
+								}
+							}
+
+							// Get Atlas Version
+							echo '<form class="d-inline" id="version-atlas-' . $name . '" action="index.php" method ="post">' .
+								'<button name="version-atlas-' . $name . '" type="submit" class="btn btn-primary controlButton">Get Version Atlas</button>' .
+                            '</form>';
+                            if(isset($_POST["version-atlas-$name"])){
+                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
+                                echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
+                                $atver = shell_exec('adb shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g"');
+                                $conn = new mysqli($servername, $username, $password, $dbname, $port);
+                                //Checking for connections
+                                if ($conn->connect_error) {
+                                        die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
+                                }else {
+                                        $sql = " UPDATE Devices SET ATVATVER = '$atver' WHERE ID = $id; ";
+                                        $conn->query($sql);
+                                        echo "Checking Atlas Version";
+                                        $conn->close();
+                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1'); ?>
+                                        <script>
+                                        window.location.reload();
+                                        </script>
+                                <?php
+                                }
+                            }	
+							
+							// get Android Version
+							echo '<form class="d-inline" id="version-android-' . $name . '" action="index.php" method ="post">' .
+								'<button name="version-android-' . $name . '" type="submit" class="btn btn-primary controlButton">Get Version Android</button>' .
+                            '</form>';
+                            if(isset($_POST["version-android-$name"])){
+                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
+                                echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
+                                $anvers= shell_exec('adb shell getprop ro.build.version.release');
+                                $conn = new mysqli($servername, $username, $password, $dbname, $port);
+                                //Checking for connections
+                                if ($conn->connect_error) {
+                                        die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
+                                }else {
+                                        $sql = " UPDATE Devices SET ANDROIDVER = '$anvers' WHERE ID = $id; ";
+                                        $conn->query($sql);
+                                        echo "Checking Android Version";
+                                        $conn->close();
+                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1'); ?>
+                                        <script>
+                                        window.location.reload();
+                                        </script>
+                                <?php
+                                }
+							}
+
+							// Reboot Single device 
 							echo '<form class="d-inline" id="reboot-' . $name . '" action="index.php" method ="post">' .
 								'<button name="reboot-' . $name . '" type="submit" class="btn btn-primary controlButton">Reboot</button>' .
 							'</form>';
@@ -218,93 +295,19 @@ echo '<div class="cssContainer">' .
 								echo $res=shell_exec('adb shell reboot > /dev/null 2>&1');
 								echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
 							}
-
-							echo '<form class"d-inline" id="version-pogo-' . $name . '" action="index.php" method ="post">' .
-                                                        '<button name="version-pogo-' . $name . '" type="submit" class="btn btn-primary versionButton">Get Version PoGo</button>' .
-                                                	'</form>';
-                                                	if(isset($_POST["version-pogo-$name"])){
-                                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
-                                                        echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
-                                                        $pogver = shell_exec('adb shell dumpsys package com.nianticlabs.pokemongo | grep -E versionName | sed -e "s@    versionName=@@g"');
-                                                        $conn = new mysqli($servername, $username, $password, $dbname, $port);
-                                                        //Checking for connections
-                                                        if ($conn->connect_error) {
-                                                                die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
-                                                        }else {
-                                                                $sql = " UPDATE Devices SET ATVPOGOVER = '$pogver' WHERE ID = $id; ";
-                                                                $conn->query($sql);
-                                                                echo "Checking PoGo Version";
-                                                                $conn->close();
-                                                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1'); ?>
-                                                                <script>
-                                                                window.location.reload();
-                                                                </script>
-                                                        <?php
-                                                        }
-                                                	}
-
-							echo '<form class="d-inline" id="version-atlas-' . $name . '" action="index.php" method ="post">' .
-                                                        '<button name="version-atlas-' . $name . '" type="submit" class="btn btn-primary versionButton">Get Version Atlas</button>' .
-                                                	'</form>';
-                                                	if(isset($_POST["version-atlas-$name"])){
-                                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
-                                                        echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
-                                                        $atver = shell_exec('adb shell dumpsys package com.pokemod.atlas | grep -E versionName | sed -e "s@    versionName=@@g"');
-                                                        $conn = new mysqli($servername, $username, $password, $dbname, $port);
-                                                        //Checking for connections
-                                                        if ($conn->connect_error) {
-                                                                die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
-                                                        }else {
-                                                                $sql = " UPDATE Devices SET ATVATVER = '$atver' WHERE ID = $id; ";
-                                                                $conn->query($sql);
-                                                                echo "Checking Atlas Version";
-                                                                $conn->close();
-                                                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1'); ?>
-                                                                <script>
-                                                                window.location.reload();
-                                                                </script>
-                                                        <?php
-                                                        }
-                                                	}	
-
-							 echo '<form id="version-android-' . $name . '" action="index.php" method ="post">' .
-                                                        '<button name="version-android-' . $name . '" type="submit" class="btn btn-primary versionButton">Get Version Android</button>' .
-                                                	'</form>';
-                                                	if(isset($_POST["version-android-$name"])){
-                                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
-                                                        echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
-                                                        $anvers= shell_exec('adb shell getprop ro.build.version.release');
-                                                        $conn = new mysqli($servername, $username, $password, $dbname, $port);
-                                                        //Checking for connections
-                                                        if ($conn->connect_error) {
-                                                                die('Connect Error (' . $mysqli->connect_errno . ') '. $mysqli->connect_error);
-                                                        }else {
-                                                                $sql = " UPDATE Devices SET ANDROIDVER = '$anvers' WHERE ID = $id; ";
-                                                                $conn->query($sql);
-                                                                echo "Checking Android Version";
-                                                                $conn->close();
-                                                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1'); ?>
-                                                                <script>
-                                                                window.location.reload();
-                                                                </script>
-                                                        <?php
-                                                        }
-							}
-
+							// Get Screenshot
 							echo
-	                                                '<form id="scrshot-' . $name . '" action="index.php" method ="post" align="center">' .
-                                                        '<button name="scrshot-' . $name . '" type="submit" class="btn btn-success controlButton">Get Screenshot!</button>' .
-        	                                        '</form>';
-                	                                if(isset($_POST["scrshot-$name"])){
-                                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
-                                                        echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
-                                                        echo $res=shell_exec('adb shell screencap -p /sdcard/screen.png > /dev/null 2>&1');
-                                                        echo $res=shell_exec("adb pull /sdcard/screen.png screenshot/$name.png > /dev/null 2>&1");
-                                                        echo $res=shell_exec("adb shell rm /sdcard/screen.png > /dev/null 2>&1");
-                                                        echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
-                        	                        }
-
-
+	                        '<form class="d-inline" id="scrshot-' . $name . '" action="index.php" method ="post" align="center">' .
+                                '<button name="scrshot-' . $name . '" type="submit" class="btn btn-success controlButton">Get Screenshot!</button>' .
+        	                '</form>';
+                	        if(isset($_POST["scrshot-$name"])){
+                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
+                                echo $res=shell_exec("adb connect $localip:$adbport > /dev/null 2>&1");
+                                echo $res=shell_exec('adb shell screencap -p /sdcard/screen.png > /dev/null 2>&1');
+                                echo $res=shell_exec("adb pull /sdcard/screen.png screenshot/$name.png > /dev/null 2>&1");
+                                echo $res=shell_exec("adb shell rm /sdcard/screen.png > /dev/null 2>&1");
+                                echo $res=shell_exec('adb kill-server > /dev/null 2>&1');
+                        	}
 					echo '</div>';
 							
 					//Atlas TAB

@@ -60,10 +60,6 @@ text-transform: uppercase;
 padding-bottom: 10px;
 }
 
-#rebootsingle {
-padding-bottom: 0px;
-}
-
 #updatesingle {
 padding-bottom: 0px;
 }
@@ -123,7 +119,6 @@ padding-bottom: 0px;
 	min-width: 125px;
 	margin-left:5px;
 	margin-top:15px;
-	margin-bottom:15px;
 }
 div.cssContainer{
 	margin-left:35px;
