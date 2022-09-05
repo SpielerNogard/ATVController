@@ -70,7 +70,9 @@ class DatabaseController:
         resp = collection.insert_one(item)
         return resp.inserted_id
 
-    def write_bulk_item(self, collection_name: str, items: List[Dict[str, Any]]) -> List[int]:
+    def write_bulk_item(
+        self, collection_name: str, items: List[Dict[str, Any]]
+    ) -> List[int]:
         """
         Method to write multiple items to collection.
 
@@ -90,24 +92,67 @@ class DatabaseController:
         resp = collection.insert_many(items)
         return resp.inserted_ids
 
-    def find_first_item(self, collection_name:str):
+    def find_first_item(self, collection_name: str) -> Dict[str, Any]:
+        """
+        Method to find the first written item in collection.
+
+        Parameters
+        ----------
+        collection_name : str
+            name of collection.
+
+        Returns
+        -------
+        Dict[str, Any]
+            found item.
+        """
         collection = self._db[collection_name]
         return collection.find_one()
 
-    def get_all_items(self, collection_name):
+    def get_all_items(self, collection_name: str) -> List[str, Any]:
+        """
+        Method to query all items from collection.
+
+        Parameters
+        ----------
+        collection_name : str
+            name of collection.
+
+        Returns
+        -------
+        List[str, Any]
+            list of dound items in collection.
+        """
         collection = self._db[collection_name]
         return collection.find()
 
     def query(
-        self, collection_name, search_key, projection_expression: List[str] = None
-    ):
+        self,
+        collection_name: str,
+        search_key: Dict[str, Any],
+        projection_expression: List[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Method to query items in collection.
+
+        Parameters
+        ----------
+        collection_name : str
+            name of collection to query items in.
+        search_key : Dict[str, Any]
+            a dict including the filter to find the items for
+            example: {'name':'test'}, to find all items, where the name is test.
+        projection_expression : List[str], optional
+            a list of keys, to include in item.
+        """
         if projection_expression:
             projection_filter = {key: 1 for key in projection_expression}
         else:
             projection_filter = None
-        collection = self._db.[collection_name]:
-        resp = collection.find(search_key, projection = projection_filter)
+        collection = self._db[collection_name]
+        resp = collection.find(search_key, projection=projection_filter)
         return resp
+
 
 if __name__ == "__main__":
     my_db = DatabaseController(db_name="test", ip="localhost")
