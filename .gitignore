@@ -10,3 +10,6 @@ public/screenshot/*
 
 #Ignore node modules
 node_modules/
+
+#Ignore venvs
+.venv
